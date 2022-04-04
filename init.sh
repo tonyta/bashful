@@ -12,5 +12,5 @@ if [ -n "$(command -v pyenv)" ]; then eval "$(pyenv init -)"; fi
 
 export EDITOR=code
 
-source "$(brew --prefix)/etc/profile.d/bash_completion.sh"
+[[ -n "$(command -v brew)" ]] && [[ -r "$(brew --prefix)/etc/profile.d/bash_completion.sh" ]] && . "$(brew --prefix)/etc/profile.d/bash_completion.sh"
 source "$(dirname ${BASH_SOURCE[0]})/custom-prompt.sh"
