@@ -43,7 +43,7 @@ function git_status {
 
 ### LifeMeter: Hearts that diminish over time
 function lifemeter {
-  local hour=$(date +%H)
+  local hour=$(TZ=America/Los_Angeles date +%H)
   if [ $hour -lt 2 ] || [ $hour -ge 24 ]; then
     local hearts="\e[5m🖤🖤🖤🖤🖤\e[m"
   elif [ $hour -lt 6 ]; then
