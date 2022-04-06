@@ -27,17 +27,15 @@ function git_branch {
 }
 
 function git_status {
-  if [ ! -d .git ]; then return 0; fi
+  local output=""
 
-  local symbol=""
-  local status="$(git status --porcelain | sed 's/^\(..\)/→\1←/')"
+  local status="$(git status --porcelain 2> /dev/null | sed 's/^\(..\)/→\1←/')"
+  if [[ "$status" =~ →([MTARC]| )[MTD]← || "$status" =~ →( )[RC]← ]]; then output+=" 🐾"; fi
+  if [[ "$status" =~ →[MTARC]([MTD]| )← || "$status" =~ →D( )← ]]; then output+=" ✏️ "; fi
+  if [[ "$status" =~ →[?][?]← ]]; then output+=" 🌱"; fi
+  if [[ "$status" =~ →U.← || "$status" =~ →.U← || "$status" =~ →DD← || "$status" =~ →AA← ]]; then output+=" 💀 💀 💀"; fi
 
-  if [[ "$status" =~ →([MTARC]| )[MTD]← || "$status" =~ →( )[RC]← ]]; then symbol+=" 🐾"; fi
-  if [[ "$status" =~ →[MTARC]([MTD]| )← || "$status" =~ →D( )← ]]; then symbol+=" ✏️ "; fi
-  if [[ "$status" =~ →[?][?]← ]]; then symbol+=" 🌱"; fi
-  if [[ "$status" =~ →U.← || "$status" =~ →.U← || "$status" =~ →DD← || "$status" =~ →AA← ]]; then symbol+=" 💀 💀 💀"; fi
-
-  echo "$symbol"
+  echo "$output"
 }
 
 
