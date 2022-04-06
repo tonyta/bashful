@@ -86,9 +86,9 @@ PS1+='\n$(exit_status)'
 PS1+=' \[\033[4;34m\]\u\[\033[m\]'   # username
 PS1+=' \[\033[32m\]\w\[\033[m\]'     # directory
 
-if [ -n '$(command -v rbenv)' ]; then PS1+=' $(rb_version)'; fi
-if [ -n '$(command -v nodenv)' ]; then PS1+=' $(py_version)'; fi
-if [ -n '$(command -v pyenv)' ]; then PS1+=' $(js_version)'; fi
+command -v rbenv  &> /dev/null && PS1+=' $(rb_version)'
+command -v nodenv &> /dev/null && PS1+=' $(js_version)'
+command -v pyenv  &> /dev/null && PS1+=' $(py_version)'
 
 PS1+=' $(lifemeter)'
 
