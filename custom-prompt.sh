@@ -22,7 +22,7 @@ function py_version {
 
 ### Git branch and status
 function git_branch {
-  local branch="$(git branch --show-current --no-color 2> /dev/null)"
+  local branch="$(git branch 2> /dev/null | head -1 | sed 's/\* \(.*\)/\1/')"
   if [ -n "$branch" ]; then echo -e "\033[1;32mgit:\033[1;33m$branch\033[0;30m"; fi
 }
 
